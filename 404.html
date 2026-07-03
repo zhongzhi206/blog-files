@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>404 页面未找到 | 信号中断</title>
+  <style>
+    /* 全局重置与字体 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0b0f1a 0%, #1a1f2f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+      color: #e8edf2;
+      line-height: 1.5;
+    }
+
+    /* 主卡片——自适应核心容器 */
+    .error-container {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(18, 25, 40, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 3.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(90, 140, 220, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 故障风格的404数字 */
+    .glitch-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .glitch-404 {
+      font-size: clamp(7rem, 20vw, 11rem);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(0, 160, 255, 0.7);
+      position: relative;
+      display: inline-block;
+      line-height: 1.1;
+      user-select: none;
+    }
+
+    /* 伪元素实现故障重影效果 */
+    .glitch-404::before,
+    .glitch-404::after {
+      content: '404';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+      color: #ffffff;
+      background: transparent;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .glitch-404::before {
+      color: #ff5e7e;
+      z-index: -1;
+      text-shadow: 0 0 8px #ff3366;
+      animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+    }
+
+    .glitch-404::after {
+      color: #4ea5ff;
+      z-index: -2;
+      text-shadow: 0 0 8px #1e90ff;
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(24px, 9999px, 90px, 0); transform: translate(-2px, -1px); }
+      20% { clip: rect(12px, 9999px, 45px, 0); transform: translate(2px, 1px); }
+      40% { clip: rect(65px, 9999px, 110px, 0); transform: translate(-1px, -2px); }
+      60% { clip: rect(32px, 9999px, 80px, 0); transform: translate(2px, -1px); }
+      80% { clip: rect(5px, 9999px, 55px, 0); transform: translate(-2px, 2px); }
+      100% { clip: rect(88px, 9999px, 130px, 0); transform: translate(1px, 1px); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(78px, 9999px, 40px, 0); transform: translate(1px, 2px); }
+      20% { clip: rect(18px, 9999px, 92px, 0); transform: translate(-2px, -1px); }
+      40% { clip: rect(50px, 9999px, 22px, 0); transform: translate(2px, -2px); }
+      60% { clip: rect(105px, 9999px, 70px, 0); transform: translate(-1px, 1px); }
+      80% { clip: rect(8px, 9999px, 115px, 0); transform: translate(-2px, -1px); }
+      100% { clip: rect(34px, 9999px, 68px, 0); transform: translate(1px, 2px); }
+    }
+
+    /* 信号图标 (自适应缩放) */
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0.3rem;
+      margin: 0.8rem 0 0.5rem;
+      height: 3.5rem;
+    }
+
+    .bar {
+      width: clamp(8px, 3vw, 14px);
+      background: linear-gradient(to top, #4ea5ff, #a0d0ff);
+      border-radius: 12px 12px 4px 4px;
+      box-shadow: 0 0 12px #3f8eff;
+      transition: height 0.25s ease;
+      animation: pulse-bar 1.8s infinite ease-in-out;
+    }
+
+    .bar:nth-child(1) { height: 30%; animation-delay: 0s; }
+    .bar:nth-child(2) { height: 50%; animation-delay: 0.2s; }
+    .bar:nth-child(3) { height: 75%; animation-delay: 0.4s; }
+    .bar:nth-child(4) { height: 100%; animation-delay: 0.6s; }
+
+    @keyframes pulse-bar {
+      0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 5px #4ea5ff); }
+      50% { opacity: 1; filter: drop-shadow(0 0 14px #82b9ff); }
+    }
+
+    .message {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      font-weight: 500;
+      margin: 1rem 0 0.5rem;
+      color: #cfddee;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .sub-message {
+      font-size: clamp(0.9rem, 3.2vw, 1.1rem);
+      color: #9aa9c1;
+      margin-bottom: 0.5rem;
+      max-width: 90%;
+      padding: 0 0.5rem;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .sub-message span {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.9em;
+      color: #7b8aa6;
+    }
+
+    /* 装饰性小元素 */
+    .decor-line {
+      width: 70%;
+      max-width: 220px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #4f7eb3, #6d9ed4, #4f7eb3, transparent);
+      margin: 1.2rem auto 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* 极简响应式调整 */
+    @media (max-width: 480px) {
+      .error-container {
+        padding: 2rem 1.2rem;
+        border-radius: 2.5rem;
+      }
+
+      .signal-icon {
+        gap: 0.25rem;
+        height: 2.8rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .error-container {
+        padding: 3rem 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <!-- 动态故障数字404 -->
+    <div class="glitch-wrapper">
+      <h1 class="glitch-404" aria-label="404错误">404</h1>
+    </div>
+
+    <!-- 信号强度示意 (自适应) -->
+    <div class="signal-icon" aria-hidden="true">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <p class="message">📡 信号丢失 · 页面未找到</p>
+    
+    <div class="sub-message">
+      您寻找的页面可能已移动、被删除或暂时不可用。
+      <span>请检查链接是否正确</span>
+    </div>
+
+    <div class="decor-line"></div>
+
+    <!-- 极简提示 -->
+    <p style="margin-top: 1.8rem; font-size: 0.8rem; color: #5f6f86; opacity: 0.9;">
+      错误代码 · 404 NOT FOUND
+    </p>
+  </div>
+</body>
+</html>
